@@ -1,209 +1,160 @@
-import Head from 'next/head'
+import React, { Suspense,useState,useEffect} from "react";
+import { Canvas } from "@react-three/fiber";
+import ALLIN from '../components/ALLIN'
+import Music2 from '../components/Music2'
+import Rotate from '../components/Rotate'
+import Social from '../dialog/Social'
+import References from '../dialog/References'
+import SendSomething from '../dialog/SendSomething'
+import Projects from '../dialog/Projects'
+import Snackbar from '@mui/material/Snackbar';
+import dynamic from 'next/dynamic';
+
+const DynamicInnerComp = dynamic(() => import('../components/ALLIN'), {
+  ssr: false,
+  loading: () =><ALLIN/>
+});
 
 export default function Home() {
+  const [unvisible,setUnvisible] = useState('')
+  const [istwerk,setIstwerk] = useState(false)
+  const [action,setAction] = useState('normal')
+  const [open, setOpen] = useState(false);
+  const [disabled, setDisabled] = useState(false)
+
+  const changeRick = (e) => {
+    setAction(e)
+  }
+  const twerk = () => {
+    setIstwerk(!istwerk)
+    setDisabled(true)
+    setTimeout(()=>{setDisabled(false)},700)
+    if(istwerk){
+      setAction('normal')
+    }else{
+      setAction('twerk')
+    }    
+  }
+
+  const burp = () => {
+    setAction('burp')
+  }
+  useEffect(() => {
+    if(action=='burp'){
+      let burpTimer = setTimeout(() =>{
+        setAction('normal')
+      },834)}
+      return ()=>{
+        clearTimeout(burpTimer)
+      }
+    },[action])
+
+    useEffect(() => {
+    if(action=='twerk'){
+      setUnvisible('invisible')
+      }else{setUnvisible('')}},[disabled])
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+         <Snackbar
+              sx={{
+                width: 250,
+                mb:-2,
+                ml:-2
+              }}
+                open={open}
+                autoHideDuration={2000}
+                onClose={handleClose}
+                message={"made for educational purposes"}
+              />
+    <Music2 className='hidden ' playy={action}></Music2>
+     <div className=" flex flex-col lg:flex-row w-screen h-screen bg ">
+          <div className={`${unvisible}  flex lg:flex-col justify-between basis-1/6 lg:basis-1/4 `}>
+           <div className="self-center ">
+            <Social className="" rick={changeRick}></Social>
+           </div> 
+           <div className=" self-center">
+            <References className=" " rick={changeRick}></References>
+           </div> 
+           <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="gooey">
+                <feGaussianBlur
+                  in="SourceGraphic"
+                  result="blur"
+                  stdDeviation="5"
+                ></feGaussianBlur>
+                <feColorMatrix
+                  in="blur"
+                  result="highContrastGraphic"
+                  values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 19 -9"
+                ></feColorMatrix>
+                <feComposite
+                  in="SourceGraphic"
+                  in2="highContrastGraphic"
+                  operator="atop"
+                ></feComposite>
+              </filter>
+            </defs>
+          </svg>
+         {/*button style owner https://codepen.io/Unleashed-Design/pen/gOrEvMV */}
+          <button id="gooey-button" onClick={()=>{burp()}} className="text-xs  lg:h-28 lg:w-28 h-16 w-16 
+          lg:text-3xl rounded-3xl self-center">
+            BURP
+            <span className="bubbles">
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+                <span className="bubble"></span>
+            </span>
+          </button>
+              <div></div>
+          </div>
+            <Canvas>
+              <Rotate action={action}/>
+              <ambientLight intensity={0.4} />
+              <directionalLight intensity={0.7} position={[-2, 5, 2]} />
+              <Suspense fallback={null}>
+                <DynamicInnerComp modell={action}/>
+              </Suspense>
+            </Canvas>
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+          <div className="basis-1/6 lg:basis-1/4 flex lg:flex-col justify-between ">
+            <div className={unvisible}>
+              <SendSomething rick={changeRick}></SendSomething>
+            </div>
+            <div className={unvisible}>
+              <Projects rick={changeRick}></Projects>
+            </div>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
+              <button onClick={twerk}  disabled={disabled} className={` lg:self-center
+                  h-16 w-16  lg:h-28 lg:w-28 dance-button -mr-5 lg:mr-0 border-none
+                  text-base  lg:text-3xl  outline-none text-white text-center rounded-3xl
+                  ${!istwerk ? "bg-[#3e8e41] shadow-[0_8px_rgb(153,153,153)] lg:shadow-[0_10px_rgba(153,153,153,1)]"
+                  : "bg-[#ff0c0c] shadow-[0_2px_rgb(153,153,153)] translate-y-1.5 lg:translate-y-2" }`}>
+                    {`${!istwerk ? "DANCE" : "STOP"}`}
+              </button>
+              <button onClick={handleClick} className= {`${unvisible} h-4 w-4 rounded-full bg-white self-end text-xs  mr-1 mb-1`}>i</button>
+         
+          </div>
+      </div>
+    </>
   )
 }
