@@ -8,12 +8,6 @@ import References from '../dialog/References'
 import SendSomething from '../dialog/SendSomething'
 import Projects from '../dialog/Projects'
 import Snackbar from '@mui/material/Snackbar';
-import dynamic from 'next/dynamic';
-
-const DynamicInnerComp = dynamic(() => import('../components/ALLIN'), {
-  ssr: false,
-  loading: () =><ALLIN/>
-});
 
 export default function Home() {
   const [unvisible,setUnvisible] = useState('')
@@ -132,7 +126,7 @@ export default function Home() {
               <ambientLight intensity={0.4} />
               <directionalLight intensity={0.7} position={[-2, 5, 2]} />
               <Suspense fallback={null}>
-                <DynamicInnerComp modell={action}/>
+                <ALLIN modell={action}/>
               </Suspense>
             </Canvas>
 
