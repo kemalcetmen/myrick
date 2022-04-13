@@ -87,10 +87,10 @@ export default function Home() {
      <div className=" flex flex-col lg:flex-row w-screen h-screen bg ">
           <div className={`${unvisible}  flex lg:flex-col justify-between basis-1/6 lg:basis-1/4 `}>
            <div className="self-center ">
-            <Social className="" rick={changeRick}></Social>
+            <Social rick={changeRick}></Social>
            </div> 
            <div className=" self-center">
-            <References className=" " rick={changeRick}></References>
+            <References rick={changeRick}></References>
            </div> 
            <svg xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -149,7 +149,6 @@ export default function Home() {
               <button onClick={eatshit} className="text-sm lg:text-4xl rounded-lg socb inline-block hover:bg-transparent bg-black px-6 py-3 lg:py-8 lg:px-14 2xl:px-24">
                 eat sh*t</button>
             </div>
-
               <button onClick={twerk}  disabled={disabled} className={` lg:self-center
                   h-16 w-16  lg:h-28 lg:w-28 dance-button -mr-5 lg:mr-0 border-none
                   text-base  lg:text-3xl  outline-none text-white text-center rounded-3xl
@@ -158,7 +157,6 @@ export default function Home() {
                     {`${!istwerk ? "DANCE" : "STOP"}`}
               </button>
               <button onClick={handleClick} className= {`${unvisible} h-4 w-4 rounded-full bg-white self-end text-xs  mr-1 mb-1`}>i</button>
-         
           </div>
       </div>
     </>
