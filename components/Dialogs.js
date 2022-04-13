@@ -17,7 +17,7 @@ const StyledModal = Modal.styled`
   @media (max-width: 1023px) {
     width: auto ;
     height: auto;
-    top: 85%;
+    top: 86%;
     display: flex;
     left: 50%;
     transform: translateX(-50%);
