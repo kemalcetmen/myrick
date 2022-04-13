@@ -5,7 +5,6 @@ import Snackbar from '@mui/material/Snackbar';
 
 export default function Projects ({rick}) {
   const myrick={
-    src:"https://www.buymeacoffee.com/kemalcetmen",
     picSrc:"/images/myrick.svg"
   }
   const handleClick = () => {
