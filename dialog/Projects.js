@@ -29,7 +29,7 @@ export default function Projects ({rick}) {
                 open={open}
                 autoHideDuration={2000}
                 onClose={handleClose}
-                message={"I'll show all my projects here (not just web development)"}
+                message={"here i will show my different projects from website development"}
               />
     <div className="flex flex-row lg:flex-col">
     <div className="rounded-full m-4 px-3 pt-3 pb-2 bg-black hidden lg:inline-block " >
