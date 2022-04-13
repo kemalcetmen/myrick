@@ -6,7 +6,6 @@ import Rotate from '../components/Rotate'
 import Social from '../dialog/Social'
 import References from '../dialog/References'
 import SendSomething from '../dialog/SendSomething'
-import Projects from '../dialog/Projects'
 import Snackbar from '@mui/material/Snackbar';
 
 export default function Home() {
@@ -29,7 +28,6 @@ export default function Home() {
       setAction('twerk')
     }    
   }
-
   const burp = () => {
     setAction('burp')
   }
@@ -42,6 +40,19 @@ export default function Home() {
         clearTimeout(burpTimer)
       }
     },[action])
+
+    const eatshit = () => {
+      setAction('eatshit')
+    }
+    useEffect(() => {
+      if(action=='eatshit'){
+        let eatshitTimer = setTimeout(() =>{
+          setAction('normal')
+        },1666)}
+        return ()=>{
+          clearTimeout(eatshitTimer)
+        }
+      },[action])
 
     useEffect(() => {
     if(action=='twerk'){
@@ -103,7 +114,7 @@ export default function Home() {
             </defs>
           </svg>
          {/*button style owner https://codepen.io/Unleashed-Design/pen/gOrEvMV */}
-          <button id="gooey-button" onClick={()=>{burp()}} className="text-xs  lg:h-28 lg:w-28 h-16 w-16 
+          <button id="gooey-button" onClick={burp} className="text-xs  lg:h-28 lg:w-28 h-16 w-16 
           lg:text-3xl rounded-3xl self-center">
             BURP
             <span className="bubbles">
@@ -135,7 +146,8 @@ export default function Home() {
               <SendSomething rick={changeRick}></SendSomething>
             </div>
             <div className={unvisible}>
-              <Projects rick={changeRick}></Projects>
+              <button onClick={eatshit} className="text-sm lg:text-4xl rounded-lg socb inline-block hover:bg-transparent bg-black px-6 py-3 lg:py-8 lg:px-14 2xl:px-24">
+                eat sh*t</button>
             </div>
 
               <button onClick={twerk}  disabled={disabled} className={` lg:self-center
