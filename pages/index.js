@@ -1,4 +1,4 @@
-import React, { Suspense,useState,useEffect} from "react";
+import React, { lazy,Suspense,useState,useEffect} from "react";
 import { Canvas } from "@react-three/fiber";
 import ALLIN from '../components/ALLIN'
 import Music2 from '../components/Music2'
@@ -8,6 +8,8 @@ import References from '../dialog/References'
 import SendSomething from '../dialog/SendSomething'
 import Projects from '../dialog/Projects'
 import Snackbar from '@mui/material/Snackbar';
+
+const ModelComponent = lazy(() => import("../components/ALLIN"));
 
 export default function Home() {
   const [unvisible,setUnvisible] = useState('')
@@ -126,7 +128,7 @@ export default function Home() {
               <ambientLight intensity={0.4} />
               <directionalLight intensity={0.7} position={[-2, 5, 2]} />
               <Suspense fallback={null}>
-                <ALLIN modell={action}/>
+                <ModelComponent modell={action}/>
               </Suspense>
             </Canvas>
 
