@@ -6,6 +6,7 @@ import Rotate from '../components/Rotate'
 import Social from '../dialog/Social'
 import References from '../dialog/References'
 import SendSomething from '../dialog/SendSomething'
+import Email from '../dialog/Email'
 import Snackbar from '@mui/material/Snackbar';
 
 export default function Home() {
@@ -146,8 +147,9 @@ export default function Home() {
               <SendSomething rick={changeRick}></SendSomething>
             </div>
             <div className={unvisible}>
-              <button onClick={eatshit} className="text-sm lg:text-4xl rounded-lg socb inline-block hover:bg-transparent bg-black px-6 py-3 lg:py-8 lg:px-14 2xl:px-24">
-                eat sh*t</button>
+            <div className=" self-center">
+              <Email rick={changeRick}></Email>
+            </div>
             </div>
               <button onClick={twerk}  disabled={disabled} className={` lg:self-center
                   h-16 w-16  lg:h-28 lg:w-28 dance-button -mr-5 lg:mr-0 border-none

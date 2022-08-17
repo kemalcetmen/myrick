@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal, { ModalProvider } from "styled-react-modal";
 
 const StyledModal = Modal.styled`
-  width: 8%;
+  width: auto;
   height: auto;
   border-radius: 15px;
   display: grid;
